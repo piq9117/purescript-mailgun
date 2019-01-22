@@ -10,16 +10,18 @@ exports.handleCallbackImpl = function (left, right, f) {
 
 exports.mailgun = function(apiKey) {
   return function (domain) {
-    return require("mailgun-js")({ apiKey: apiKey, domain: domain })
-  }
-}
+    return require("mailgun-js")({ apiKey: apiKey, domain: domain });
+  };
+};
 
 exports.messages = function (mailgun) {
-  return mailgun.messages()
-}
+  return mailgun.messages();
+};
 
 exports.sendMessageImpl = function (messages) {
   return function (msgData) {
-    return messages.send(msgData);
+    return function (cb) {
+      return messages.send(msgData, cb);
+    }
   };
 };

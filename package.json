@@ -1,0 +1,26 @@
+{
+  "name": "purescript-mailgun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piq9117/purescript-mailgun.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piq9117/purescript-mailgun/issues"
+  },
+  "homepage": "https://github.com/piq9117/purescript-mailgun#readme",
+  "dependencies": {
+    "mailgun-js": "^0.22.0"
+  }
+}

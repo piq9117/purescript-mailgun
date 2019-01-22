@@ -1,4 +1,11 @@
-module Mailgun where
+module Mailgun
+       ( MessageData(..)
+       , Mailgun
+       , MailgunMessage
+       , sendMessage
+       , mailgun
+       , messages
+       ) where
 
 import Prelude
 
@@ -21,7 +28,8 @@ foreign import handleCallbackImpl
 handleCallback :: ∀ a. (Callback a) -> JSCallback a
 handleCallback cb = runFn3 handleCallbackImpl Left Right cb
 
-type MessageData =
+newtype MessageData =
+  MessageData
   { from :: String
   , to :: String
   , subject :: String
@@ -33,9 +41,9 @@ foreign import data MailgunMessage :: Type
 foreign import mailgun :: String -> String -> Mailgun
 foreign import messages :: Mailgun -> MailgunMessage
 foreign import sendMessageImpl
-  :: MailgunMessage -> MessageData -> JSCallback Unit -> Effect Unit
+  :: ∀ a. MailgunMessage -> MessageData -> JSCallback a -> Effect Unit
 
-sendMessage :: MailgunMessage -> MessageData -> Callback Unit -> Effect Unit
+sendMessage :: ∀ a. MailgunMessage -> MessageData -> Callback a -> Effect Unit
 sendMessage msg msgData cb =
   sendMessageImpl msg msgData (handleCallback cb)
 
