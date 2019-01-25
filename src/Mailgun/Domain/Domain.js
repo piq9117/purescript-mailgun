@@ -4,9 +4,9 @@ var isNil = function (a) {
 
 exports.domainImpl = function(mailgun, domainInput) {
   if(isNil(domainInput)) {
-    return mailgun.domain();
+    return mailgun.domains();
   } else {
-    return mailgun.domain(domainInput);
+    return mailgun.domains(domainInput);
   };
 };
 
