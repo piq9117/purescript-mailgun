@@ -7,16 +7,13 @@ module Mailgun.Message
 
 import Data.Function.Uncurried (Fn3, runFn3)
 import Effect (Effect)
-import Mailgun (Callback, Mailgun, JSCallback, handleCallback)
+import Mailgun (Mailgun)
 import Prelude (Unit)
--- foreign import sendMessageImpl
---   :: ∀ a. MailgunMessage -> MessageData -> JSCallback a -> Effect Unit
-
-foreign import sendMessageImpl
-  :: ∀ a. Fn3 MailgunMessage MessageData (JSCallback a) (Effect Unit)
+import Mailgun.Common
 
 foreign import data MailgunMessage :: Type
-
+foreign import sendMessageImpl
+  :: ∀ a. Fn3 MailgunMessage MessageData (JSCallback a) (Effect Unit)
 foreign import messages :: Mailgun -> MailgunMessage
 
 newtype MessageData =
