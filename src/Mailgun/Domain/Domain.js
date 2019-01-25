@@ -2,7 +2,7 @@ var isNil = function (a) {
   return a === undefined || a === null;
 };
 
-exports.domain = function(mailgun, domainInput) {
+exports.domainImpl = function(mailgun, domainInput) {
   if(isNil(domainInput)) {
     return mailgun.domain();
   } else {
