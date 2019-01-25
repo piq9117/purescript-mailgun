@@ -10,6 +10,6 @@ exports.domainImpl = function(mailgun, domainInput) {
   };
 };
 
-exports.listImpl = function(domain, domainInput, cb) {
-  return domain(domainInput).list(cb);
+exports.listImpl = function(domain, cb) {
+  return domain.list(cb);
 };
