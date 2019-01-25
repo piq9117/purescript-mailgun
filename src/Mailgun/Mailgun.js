@@ -13,15 +13,3 @@ exports.mailgun = function(apiKey) {
     return require("mailgun-js")({ apiKey: apiKey, domain: domain });
   };
 };
-
-exports.messages = function (mailgun) {
-  return mailgun.messages();
-};
-
-exports.sendMessageImpl = function (messages) {
-  return function (msgData) {
-    return function (cb) {
-      return messages.send(msgData, cb);
-    }
-  };
-};
