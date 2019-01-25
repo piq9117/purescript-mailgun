@@ -20,7 +20,7 @@
     "url": "https://github.com/piq9117/purescript-mailgun/issues"
   },
   "homepage": "https://github.com/piq9117/purescript-mailgun#readme",
-  "dependencies": {
+  "peerDependencies": {
     "mailgun-js": "^0.22.0"
   }
 }
