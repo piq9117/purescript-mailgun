@@ -1,11 +1,18 @@
-module Messages where
+module Mailgun.Message
+       ( MailgunMessage
+       , MessageData(..)
+       , sendMessage
+       , messages
+       ) where
 
 import Effect (Effect)
-import Mailgun (Mailgun, Callback, MailgunMessage, JSCallback, handleCallback)
+import Mailgun (Mailgun, Callback, JSCallback, handleCallback)
 import Prelude (Unit)
 
 foreign import sendMessageImpl
   :: ∀ a. MailgunMessage -> MessageData -> JSCallback a -> Effect Unit
+
+foreign import data MailgunMessage :: Type
 
 foreign import messages :: Mailgun -> MailgunMessage
 

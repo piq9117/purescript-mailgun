@@ -1,6 +1,5 @@
 module Mailgun
        ( Mailgun
-       , MailgunMessage
        , Callback
        , JSCallback
        , handleCallback
@@ -29,5 +28,4 @@ handleCallback :: ∀ a. (Callback a) -> JSCallback a
 handleCallback cb = runFn3 handleCallbackImpl Left Right cb
 
 foreign import data Mailgun :: Type
-foreign import data MailgunMessage :: Type
 foreign import mailgun :: String -> String -> Mailgun
