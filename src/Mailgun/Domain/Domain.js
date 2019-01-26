@@ -10,6 +10,22 @@ exports.domainImpl = function(mailgun, domainInput) {
   };
 };
 
-exports.listImpl = function(domain, cb) {
-  return domain.list(cb);
+exports.listImpl = function(domains, cb) {
+  return domains.list(cb);
 };
+
+exports.infoImpl = function(domains, cb) {
+  return domains.info(cb);
+};
+
+exports.createImpl = function(domains, attributes, cb) {
+  return domains.create(attribute, cb);
+};
+
+exports.deleteImpl = function(domains, cb) {
+  return domains.delete(cb);
+}
+
+exports.verifyImpl = function(domains, attributes, cb) {
+  return domains.verify().verify(attributes, cb);
+}
