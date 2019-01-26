@@ -8,7 +8,6 @@
   ],
   "dependencies": {
     "purescript-prelude": "^4.1.0",
-    "purescript-console": "^4.2.0",
     "purescript-effect": "^2.0.0",
     "purescript-exceptions": "^4.0.0",
     "purescript-nullable": "^4.1.1",
@@ -17,6 +16,7 @@
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0",
-    "purescript-node-process": "^6.0.0"
+    "purescript-node-process": "^6.0.0",
+    "purescript-console": "^4.2.0"
   }
 }
