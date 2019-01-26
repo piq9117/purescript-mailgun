@@ -17,3 +17,11 @@ exports.listImpl = function(credentials, cb) {
 exports.createImpl = function(credentials, attributes, cb) {
   return credentials.create(attributes, cb);
 };
+
+exports.updateImpl = function(credentials, attributes, cb) {
+  return credentials.update(attributes, cb);
+};
+
+exports.deleteImpl = function(credentials, cb) {
+  return credentials.delete(cb);
+};
