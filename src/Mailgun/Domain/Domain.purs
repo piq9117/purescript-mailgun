@@ -2,8 +2,8 @@ module Mailgun.Domain
        ( Domain
        , DomainAttr
        , Attr
-       , SpamAction
-       , DkimSize
+       , SpamAction(..)
+       , DkimSize(..)
        , domain
        , list
        , info
