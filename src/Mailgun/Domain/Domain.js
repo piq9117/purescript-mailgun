@@ -19,7 +19,7 @@ exports.infoImpl = function(domains, cb) {
 };
 
 exports.createImpl = function(domains, attributes, cb) {
-  return domains.create(attribute, cb);
+  return domains.create(attributes, cb);
 };
 
 exports.deleteImpl = function(domains, cb) {
