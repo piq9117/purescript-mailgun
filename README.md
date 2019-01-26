@@ -1,4 +1,5 @@
 # purescript-mailgun
 
-## Docs
 [Mailgun](generated-docs/Mailgun.md)
+
+[Domain](generated-docs/Mailgun/Domain.md)
