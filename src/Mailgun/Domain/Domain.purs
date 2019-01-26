@@ -29,8 +29,7 @@ foreign import createImpl :: ∀ a. EffectFn3 Domain Attr (JSCallback a) Unit
 foreign import deleteImpl :: ∀ a. EffectFn2 Domain (JSCallback a) Unit
 foreign import verifyImpl :: ∀ a. EffectFn3 Domain Attr (JSCallback a) Unit
 
-data Attr =
-  Attr
+type Attr =
   { name :: String
   , smtp_password :: String
   , spam_action :: String
@@ -74,7 +73,6 @@ spamActionToStr s =
 
 domToAttr :: DomainAttr -> Attr
 domToAttr attr =
-  (Attr
   { name: attr.name
   , smtp_password: attr.smtp_password
   , spam_action: (spamActionToStr attr.spam_action)
@@ -82,7 +80,7 @@ domToAttr attr =
   , force_dkim_authority: attr.force_dkim_authority
   , dkim_key_size: (dkimToInt attr.dkim_key_size)
   , ips: attr.ips
-  })
+  }
 
 -- | This API allows you to create, access, and validate domains
 -- | programmcatically.
