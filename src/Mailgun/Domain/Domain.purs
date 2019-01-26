@@ -5,11 +5,11 @@ module Mailgun.Domain
        , SpamAction(..)
        , DkimSize(..)
        , domain
-       , list
-       , info
-       , create
-       , delete
-       , verify
+       , domainList
+       , domainInfo
+       , createDomain
+       , deleteDomain
+       , verifyDomain
        ) where
 
 import Data.Function.Uncurried (Fn2, runFn2)
@@ -88,23 +88,23 @@ domain :: Mailgun -> Maybe String -> Domain
 domain mg str = runFn2 domainImpl mg (toNullable str)
 
 -- | Returns a list of domains under your accoung in JSON.
-list :: ∀ a. Domain -> Callback a -> Effect Unit
-list dom cb = runEffectFn2 listImpl dom (handleCallback cb)
+domainList :: ∀ a. Domain -> Callback a -> Effect Unit
+domainList dom cb = runEffectFn2 listImpl dom (handleCallback cb)
 
 -- | Returns a single domain, includeing credentials and DNS records.
-info :: ∀ a. Domain -> Callback a -> Effect Unit
-info dom cb = runEffectFn2 infoImpl dom (handleCallback cb)
+domainInfo :: ∀ a. Domain -> Callback a -> Effect Unit
+domainInfo dom cb = runEffectFn2 infoImpl dom (handleCallback cb)
 
 -- | Create a new domain.
-create :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
-create dom attr cb =
+createDomain :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
+createDomain dom attr cb =
   runEffectFn3 createImpl dom (domToAttr attr) (handleCallback cb)
 
 -- | Delete a domain from your account
-delete :: ∀ a. Domain -> Callback a -> Effect Unit
-delete dom cb = runEffectFn2 deleteImpl dom (handleCallback cb)
+deleteDomain :: ∀ a. Domain -> Callback a -> Effect Unit
+deleteDomain dom cb = runEffectFn2 deleteImpl dom (handleCallback cb)
 
 -- | Verifies and retursn a single domain, including credentials and DNS records.
-verify :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
-verify dom attr cb =
+verifyDomain :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
+verifyDomain dom attr cb =
   runEffectFn3 verifyImpl dom (domToAttr attr) (handleCallback cb)

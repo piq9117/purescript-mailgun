@@ -44,42 +44,42 @@ domain :: Mailgun -> Maybe String -> Domain
 This API allows you to create, access, and validate domains
 programmcatically.
 
-#### `list`
+#### `domainList`
 
 ``` purescript
-list :: forall a. Domain -> Callback a -> Effect Unit
+domainList :: forall a. Domain -> Callback a -> Effect Unit
 ```
 
 Returns a list of domains under your accoung in JSON.
 
-#### `info`
+#### `domainInfo`
 
 ``` purescript
-info :: forall a. Domain -> Callback a -> Effect Unit
+domainInfo :: forall a. Domain -> Callback a -> Effect Unit
 ```
 
 Returns a single domain, includeing credentials and DNS records.
 
-#### `create`
+#### `createDomain`
 
 ``` purescript
-create :: forall a. Domain -> DomainAttr -> Callback a -> Effect Unit
+createDomain :: forall a. Domain -> DomainAttr -> Callback a -> Effect Unit
 ```
 
 Create a new domain.
 
-#### `delete`
+#### `deleteDomain`
 
 ``` purescript
-delete :: forall a. Domain -> Callback a -> Effect Unit
+deleteDomain :: forall a. Domain -> Callback a -> Effect Unit
 ```
 
 Delete a domain from your account
 
-#### `verify`
+#### `verifyDomain`
 
 ``` purescript
-verify :: forall a. Domain -> DomainAttr -> Callback a -> Effect Unit
+verifyDomain :: forall a. Domain -> DomainAttr -> Callback a -> Effect Unit
 ```
 
 Verifies and retursn a single domain, including credentials and DNS records.
