@@ -6,6 +6,7 @@ module Mailgun.Domain
        , DkimSize
        , domain
        , list
+       , info
        , create
        , delete
        , verify
