@@ -1,15 +1,14 @@
 module Mailgun.Domain
        ( Domain
        , DomainAttr
-       , Attr
        , SpamAction(..)
        , DkimSize(..)
        , domain
-       , domainList
-       , domainInfo
-       , createDomain
-       , deleteDomain
-       , verifyDomain
+       , list
+       , info
+       , create
+       , delete
+       , verify
        ) where
 
 import Data.Function.Uncurried (Fn2, runFn2)
@@ -25,11 +24,11 @@ foreign import data Domain :: Type
 foreign import domainImpl :: Fn2 Mailgun (Nullable String) Domain
 foreign import listImpl :: ∀ a. EffectFn2 Domain (JSCallback a) Unit
 foreign import infoImpl :: ∀ a. EffectFn2 Domain (JSCallback a) Unit
-foreign import createImpl :: ∀ a. EffectFn3 Domain Attr (JSCallback a) Unit
+foreign import createImpl :: ∀ a. EffectFn3 Domain DomainAttrExt (JSCallback a) Unit
 foreign import deleteImpl :: ∀ a. EffectFn2 Domain (JSCallback a) Unit
-foreign import verifyImpl :: ∀ a. EffectFn3 Domain Attr (JSCallback a) Unit
+foreign import verifyImpl :: ∀ a. EffectFn3 Domain DomainAttrExt (JSCallback a) Unit
 
-type Attr =
+type DomainAttrExt =
   { name :: String
   , smtp_password :: String
   , spam_action :: String
@@ -71,7 +70,7 @@ spamActionToStr s =
     Block -> "block"
     Tag -> "tag"
 
-domToAttr :: DomainAttr -> Attr
+domToAttr :: DomainAttr -> DomainAttrExt
 domToAttr attr =
   { name: attr.name
   , smtp_password: attr.smtp_password
@@ -88,23 +87,23 @@ domain :: Mailgun -> Maybe String -> Domain
 domain mg str = runFn2 domainImpl mg (toNullable str)
 
 -- | Returns a list of domains under your accoung in JSON.
-domainList :: ∀ a. Domain -> Callback a -> Effect Unit
-domainList dom cb = runEffectFn2 listImpl dom (handleCallback cb)
+list :: ∀ a. Domain -> Callback a -> Effect Unit
+list dom cb = runEffectFn2 listImpl dom (handleCallback cb)
 
 -- | Returns a single domain, includeing credentials and DNS records.
-domainInfo :: ∀ a. Domain -> Callback a -> Effect Unit
-domainInfo dom cb = runEffectFn2 infoImpl dom (handleCallback cb)
+info :: ∀ a. Domain -> Callback a -> Effect Unit
+info dom cb = runEffectFn2 infoImpl dom (handleCallback cb)
 
 -- | Create a new domain.
-createDomain :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
-createDomain dom attr cb =
+create :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
+create dom attr cb =
   runEffectFn3 createImpl dom (domToAttr attr) (handleCallback cb)
 
 -- | Delete a domain from your account
-deleteDomain :: ∀ a. Domain -> Callback a -> Effect Unit
-deleteDomain dom cb = runEffectFn2 deleteImpl dom (handleCallback cb)
+delete :: ∀ a. Domain -> Callback a -> Effect Unit
+delete dom cb = runEffectFn2 deleteImpl dom (handleCallback cb)
 
 -- | Verifies and retursn a single domain, including credentials and DNS records.
-verifyDomain :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
-verifyDomain dom attr cb =
+verify :: ∀ a. Domain -> DomainAttr -> Callback a -> Effect Unit
+verify dom attr cb =
   runEffectFn3 verifyImpl dom (domToAttr attr) (handleCallback cb)

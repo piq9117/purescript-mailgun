@@ -6,7 +6,7 @@ module Mailgun.Tracking
        , UnsubscribeTracking
        , IsActive(..)
        , tracking
-       , trackingInfo
+       , info
        , openTracking
        , clickTracking
        , updateOpenTracking
@@ -31,10 +31,10 @@ foreign import trackingImpl :: Fn1 Domain Tracking
 foreign import infoImpl :: ∀ a. EffectFn2 Tracking (JSCallback a) Unit
 foreign import openTrackingImpl :: Fn1 Tracking OpenTracking
 foreign import updateOpenTrackingImpl
-  :: ∀ a. EffectFn3 OpenTracking AttrExt (JSCallback a) Unit
+  :: ∀ a. EffectFn3 OpenTracking TrackingAttrExt (JSCallback a) Unit
 foreign import clickTrackingImpl :: Fn1 Tracking ClickTracking
 foreign import updateClickTrackingImpl
-  :: ∀ a. EffectFn3 ClickTracking AttrExt (JSCallback a) Unit
+  :: ∀ a. EffectFn3 ClickTracking TrackingAttrExt (JSCallback a) Unit
 foreign import unsubTrackingImpl :: Fn1 Tracking UnsubscribeTracking
 foreign import updateUnsubTrackingImpl
   :: ∀ a. EffectFn3 UnsubscribeTracking UnsubscribeAttr (JSCallback a) Unit
@@ -44,10 +44,10 @@ data IsActive
   | No
   | HTML
 
-type AttrExt =
+type TrackingAttrExt =
   { active :: String }
 
-type Attr =
+type TrackingAttr =
   { active :: IsActive }
 
 type UnsubscribeAttr =
@@ -63,7 +63,7 @@ isActiveToStr a =
     No -> "no"
     HTML -> "htmlonly"
 
-attrToExt :: Attr -> AttrExt
+attrToExt :: TrackingAttr -> TrackingAttrExt
 attrToExt attr =
   { active : (isActiveToStr attr.active) }
 
@@ -72,8 +72,8 @@ tracking :: Domain -> Tracking
 tracking dom = runFn1 trackingImpl dom
 
 -- | Returns tracking settings for a domain.
-trackingInfo :: ∀ a. Tracking -> (Callback a) -> Effect Unit
-trackingInfo trk cb = runEffectFn2 infoImpl trk (handleCallback cb)
+info :: ∀ a. Tracking -> (Callback a) -> Effect Unit
+info trk cb = runEffectFn2 infoImpl trk (handleCallback cb)
 
 -- | Open Tracking api.
 openTracking :: Tracking -> OpenTracking
@@ -84,12 +84,12 @@ clickTracking :: Tracking -> ClickTracking
 clickTracking trk = runFn1 clickTrackingImpl trk
 
 -- | Updates the open tracking settings for a domain.
-updateOpenTracking :: ∀ a. OpenTracking -> Attr -> Callback a -> Effect Unit
+updateOpenTracking :: ∀ a. OpenTracking -> TrackingAttr -> Callback a -> Effect Unit
 updateOpenTracking opt attr cb =
   runEffectFn3 updateOpenTrackingImpl opt (attrToExt attr) (handleCallback cb)
 
 -- | Updates the click tracking settings for a domain.
-updateClickTracking :: ∀ a. ClickTracking -> Attr -> Callback a -> Effect Unit
+updateClickTracking :: ∀ a. ClickTracking -> TrackingAttr -> Callback a -> Effect Unit
 updateClickTracking ct attr cb =
   runEffectFn3 updateClickTrackingImpl ct (attrToExt attr) (handleCallback cb)
 
