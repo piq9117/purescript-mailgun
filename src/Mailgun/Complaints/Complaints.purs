@@ -1,4 +1,4 @@
-module Complaints where
+module Mailgun.Complaints where
 
 import Data.Date
 
