@@ -4,10 +4,10 @@ module Mailgun.Complaints
        ( Complaints
        , ComplaintsAttr
        , complaints
-       , complaintsList
-       , createComplaints
-       , complaintsInfo
-       , deleteComplaint
+       , list
+       , create
+       , info
+       , delete
        ) where
 
 import Data.Date
@@ -34,23 +34,24 @@ type ComplaintsAttr =
   { address :: String
   , created_at :: Effect Date
   }
+
 -- | complaints api.
 complaints :: Mailgun -> Maybe String -> Complaints
 complaints m addr = runFn2 complaintsImpl m (toNullable addr)
 
 -- | Fetches the list of complaints.
-complaintsList :: ∀ a. Complaints -> Callback a -> Effect Unit
-complaintsList com cb = runEffectFn2 listImpl com (handleCallback cb)
+list :: ∀ a. Complaints -> Callback a -> Effect Unit
+list com cb = runEffectFn2 listImpl com (handleCallback cb)
 
 -- | Add an address to the complaints table.
-createComplaints :: ∀ a. Complaints -> ComplaintsAttr -> Callback a -> Effect Unit
-createComplaints com attr cb =
+create :: ∀ a. Complaints -> ComplaintsAttr -> Callback a -> Effect Unit
+create com attr cb =
   runEffectFn3 createImpl com attr (handleCallback cb)
 
 -- | Fetches a single spam complaint by a given email address.
-complaintsInfo :: ∀ a. Complaints -> Callback a -> Effect Unit
-complaintsInfo com cb = runEffectFn2 infoImpl com (handleCallback cb)
+info :: ∀ a. Complaints -> Callback a -> Effect Unit
+info com cb = runEffectFn2 infoImpl com (handleCallback cb)
 
 -- | Removes a given spam complaint.
-deleteComplaint :: ∀ a. Complaints -> Callback a -> Effect Unit
-deleteComplaint com cb = runEffectFn2 deleteImpl com (handleCallback cb)
+delete :: ∀ a. Complaints -> Callback a -> Effect Unit
+delete com cb = runEffectFn2 deleteImpl com (handleCallback cb)

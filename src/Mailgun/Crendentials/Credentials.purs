@@ -2,6 +2,10 @@
 module Mailgun.Credentials
        ( Credentials
        , credentials
+       , list
+       , create
+       , update
+       , delete
        ) where
 
 import Effect.Uncurried
