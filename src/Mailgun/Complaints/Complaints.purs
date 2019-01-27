@@ -1,3 +1,5 @@
+-- | This API allows you to programmatically download the list of users who have complained,
+-- | add a complaint, or delete a complaint.
 module Mailgun.Complaints
        ( Complaints
        , ComplaintsAttr
@@ -19,6 +21,7 @@ import Mailgun (Mailgun)
 import Mailgun.Common (Callback, JSCallback, handleCallback)
 import Prelude (Unit)
 
+-- | `Complaints` represents the complaints api.
 foreign import data Complaints :: Type
 
 foreign import complaintsImpl :: Fn2 Mailgun (Nullable String) Complaints
@@ -31,19 +34,23 @@ type ComplaintsAttr =
   { address :: String
   , created_at :: Effect Date
   }
-
+-- | complaints api.
 complaints :: Mailgun -> Maybe String -> Complaints
 complaints m addr = runFn2 complaintsImpl m (toNullable addr)
 
+-- | Fetches the list of complaints.
 complaintsList :: ∀ a. Complaints -> Callback a -> Effect Unit
 complaintsList com cb = runEffectFn2 listImpl com (handleCallback cb)
 
+-- | Add an address to the complaints table.
 createComplaints :: ∀ a. Complaints -> ComplaintsAttr -> Callback a -> Effect Unit
 createComplaints com attr cb =
   runEffectFn3 createImpl com attr (handleCallback cb)
 
+-- | Fetches a single spam complaint by a given email address.
 complaintsInfo :: ∀ a. Complaints -> Callback a -> Effect Unit
 complaintsInfo com cb = runEffectFn2 infoImpl com (handleCallback cb)
 
+-- | Removes a given spam complaint.
 deleteComplaint :: ∀ a. Complaints -> Callback a -> Effect Unit
 deleteComplaint com cb = runEffectFn2 deleteImpl com (handleCallback cb)
