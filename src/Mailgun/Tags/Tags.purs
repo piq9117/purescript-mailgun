@@ -8,6 +8,7 @@ module Mailgun.Tags
        , TagStats
        , tags
        , info
+       , list
        , aggregates
        , countries
        , countriesList
