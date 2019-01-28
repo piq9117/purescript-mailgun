@@ -5,6 +5,7 @@ module Tags
        , Countries
        , Providers
        , Devices
+       , TagStats
        , tags
        , info
        , aggregates
@@ -15,6 +16,8 @@ module Tags
        , devices
        , devicesList
        , delete
+       , tagStats
+       , tagStatsInfo
        ) where
 
 import Mailgun.Common
