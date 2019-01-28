@@ -1,5 +1,5 @@
 -- | Deletes all counters for particular tag and the tag itself.
-module Tags
+module Mailgun.Tags
        ( Tags
        , Aggregates
        , Countries
