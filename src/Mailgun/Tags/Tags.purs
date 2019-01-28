@@ -42,7 +42,7 @@ foreign import data TagStats :: Type
 foreign import tagsImpl :: Fn2 Mailgun (Nullable String) Tags
 foreign import infoImpl :: ∀ a. EffectFn2 Tags (JSCallback a) Unit
 foreign import listImpl :: ∀ a. EffectFn2 Tags (JSCallback a) Unit
-foreign import tagStatsImpl :: Fn1 Stats TagStats
+foreign import tagStatsImpl :: Fn1 Tags TagStats
 foreign import tagStatsInfoImpl :: ∀ a. EffectFn2 TagStats (JSCallback a) Unit
 foreign import aggregatesImpl :: Fn1 Stats Aggregates
 foreign import countriesImpl :: Fn1 Aggregates Countries
@@ -66,7 +66,7 @@ info :: ∀ a. Tags -> Callback a -> Effect Unit
 info t cb = runEffectFn2 infoImpl t (handleCallback cb)
 
 -- | tag stats api.
-tagStats :: Stats -> TagStats
+tagStats :: Tags -> TagStats
 tagStats = runFn1 tagStatsImpl
 
 -- | Returns statistics for a given tag.
