@@ -27,9 +27,8 @@ import Data.Function.Uncurried (runFn1, Fn1, Fn2, runFn2)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toNullable)
 import Effect (Effect)
-import Effect.Uncurried (EffectFn2, runEffectFn2)
+import Effect.Uncurried (EffectFn2, EffectFn3, runEffectFn2)
 import Mailgun (Mailgun)
-import Mailgun.Stats (Stats)
 import Prelude (Unit)
 
 foreign import data Tags :: Type
@@ -41,10 +40,10 @@ foreign import data TagStats :: Type
 
 foreign import tagsImpl :: Fn2 Mailgun (Nullable String) Tags
 foreign import infoImpl :: ∀ a. EffectFn2 Tags (JSCallback a) Unit
-foreign import listImpl :: ∀ a. EffectFn2 Tags (JSCallback a) Unit
+foreign import listImpl :: ∀ a. EffectFn3 Tags TagsAttr (JSCallback a) Unit
 foreign import tagStatsImpl :: Fn1 Tags TagStats
 foreign import tagStatsInfoImpl :: ∀ a. EffectFn2 TagStats (JSCallback a) Unit
-foreign import aggregatesImpl :: Fn1 Stats Aggregates
+foreign import aggregatesImpl :: Fn1 TagStats Aggregates
 foreign import countriesImpl :: Fn1 Aggregates Countries
 foreign import countriesListImpl :: ∀ a. EffectFn2 Countries (JSCallback a) Unit
 foreign import providersImpl :: Fn1 Aggregates Providers
@@ -53,12 +52,17 @@ foreign import devicesImpl :: Fn1 Aggregates Devices
 foreign import devicesListImpl :: ∀ a. EffectFn2 Devices (JSCallback a) Unit
 foreign import deleteImpl :: ∀ a. EffectFn2 Tags (JSCallback a) Unit
 
+type TagsAttr =
+  { domain :: String
+  , limit :: Int
+  }
+
 -- | tags api.
 tags :: Mailgun -> Maybe String -> Tags
 tags mg s = runFn2 tagsImpl mg (toNullable s)
 
 -- | List all tags.
-list :: ∀ a. Tags -> Callback a -> Effect Unit
+list :: ∀ a. Tags -> TagsAttr -> Callback a -> Effect Unit
 list tag cb = runEffectFn2 listImpl tag (handleCallback cb)
 
 -- | Gets a specific tag.
@@ -74,7 +78,7 @@ tagStatsInfo :: ∀ a. TagStats -> Callback a -> Effect Unit
 tagStatsInfo tag cb = runEffectFn2 tagStatsInfoImpl tag (handleCallback cb)
 
 -- | aggregates api.
-aggregates :: Stats -> Aggregates
+aggregates :: TagStats -> Aggregates
 aggregates s = runFn1 aggregatesImpl s
 
 -- | countries api.
