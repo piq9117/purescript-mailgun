@@ -1,4 +1,4 @@
-## Module Bounces
+## Module Mailgun.Bounces
 
 Mailgun automatically handles bounced emails. The list of bounced
 address can be accessed programmatically.

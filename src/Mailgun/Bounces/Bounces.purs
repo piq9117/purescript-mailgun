@@ -1,6 +1,6 @@
 -- | Mailgun automatically handles bounced emails. The list of bounced
 -- | address can be accessed programmatically.
-module Bounces
+module Mailgun.Bounces
        ( Bounces
        , BouncesAttr
        , bounces
