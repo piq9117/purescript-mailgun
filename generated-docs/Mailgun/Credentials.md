@@ -8,76 +8,40 @@ Programatically get and modify domain credentials
 data Credentials :: Type
 ```
 
-#### `credentialsImpl`
-
-``` purescript
-credentialsImpl :: Fn2 Domain (Nullable String) Credentials
-```
-
-#### `listImpl`
-
-``` purescript
-listImpl :: forall a. EffectFn2 Credentials (JSCallback a) Unit
-```
-
-#### `createImpl`
-
-``` purescript
-createImpl :: forall a. EffectFn3 Credentials Attr (JSCallback a) Unit
-```
-
-#### `updateImpl`
-
-``` purescript
-updateImpl :: forall a. EffectFn3 Credentials Attr (JSCallback a) Unit
-```
-
-#### `deleteImpl`
-
-``` purescript
-deleteImpl :: forall a. EffectFn2 Credentials (JSCallback a) Unit
-```
-
-#### `Attr`
-
-``` purescript
-type Attr = { login :: String, password :: String }
-```
-
 #### `credentials`
 
 ``` purescript
 credentials :: Domain -> Maybe String -> Credentials
 ```
 
-#### `credentialList`
+#### `list`
 
 ``` purescript
-credentialList :: forall a. Credentials -> Callback a -> Effect Unit
+list :: forall a. Credentials -> Callback a -> Effect Unit
 ```
 
 Returns a list of SMTP credentials for the defined domain.
 
-#### `createCredentials`
+#### `create`
 
 ``` purescript
-createCredentials :: forall a. Credentials -> Attr -> Callback a -> Effect Unit
+create :: forall a. Credentials -> CredentialsAttr -> Callback a -> Effect Unit
 ```
 
 Creates a new set of SMTP credentials for the defined domain
 
-#### `updateCredentials`
+#### `update`
 
 ``` purescript
-updateCredentials :: forall a. Credentials -> Attr -> Callback a -> Effect Unit
+update :: forall a. Credentials -> CredentialsAttr -> Callback a -> Effect Unit
 ```
 
 Updates the specified SMTP credentials. Currently only the password can be changed.
 
-#### `deleteCredentials`
+#### `delete`
 
 ``` purescript
-deleteCredentials :: forall a. Credentials -> Callback a -> Effect Unit
+delete :: forall a. Credentials -> Callback a -> Effect Unit
 ```
 
 Deletes the defined SMTP credentials.

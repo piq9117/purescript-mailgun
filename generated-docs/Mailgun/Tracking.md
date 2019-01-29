@@ -43,10 +43,10 @@ tracking :: Domain -> Tracking
 
 Tracking api
 
-#### `trackingInfo`
+#### `info`
 
 ``` purescript
-trackingInfo :: forall a. Tracking -> (Callback a) -> Effect Unit
+info :: forall a. Tracking -> (Callback a) -> Effect Unit
 ```
 
 Returns tracking settings for a domain.
@@ -70,7 +70,7 @@ Click Tracking api
 #### `updateOpenTracking`
 
 ``` purescript
-updateOpenTracking :: forall a. OpenTracking -> Attr -> Callback a -> Effect Unit
+updateOpenTracking :: forall a. OpenTracking -> TrackingAttr -> Callback a -> Effect Unit
 ```
 
 Updates the open tracking settings for a domain.
@@ -78,7 +78,7 @@ Updates the open tracking settings for a domain.
 #### `updateClickTracking`
 
 ``` purescript
-updateClickTracking :: forall a. ClickTracking -> Attr -> Callback a -> Effect Unit
+updateClickTracking :: forall a. ClickTracking -> TrackingAttr -> Callback a -> Effect Unit
 ```
 
 Updates the click tracking settings for a domain.

@@ -25,34 +25,34 @@ complaints :: Mailgun -> Maybe String -> Complaints
 
 complaints api.
 
-#### `complaintsList`
+#### `list`
 
 ``` purescript
-complaintsList :: forall a. Complaints -> Callback a -> Effect Unit
+list :: forall a. Complaints -> Callback a -> Effect Unit
 ```
 
 Fetches the list of complaints.
 
-#### `createComplaints`
+#### `create`
 
 ``` purescript
-createComplaints :: forall a. Complaints -> ComplaintsAttr -> Callback a -> Effect Unit
+create :: forall a. Complaints -> ComplaintsAttr -> Callback a -> Effect Unit
 ```
 
 Add an address to the complaints table.
 
-#### `complaintsInfo`
+#### `info`
 
 ``` purescript
-complaintsInfo :: forall a. Complaints -> Callback a -> Effect Unit
+info :: forall a. Complaints -> Callback a -> Effect Unit
 ```
 
 Fetches a single spam complaint by a given email address.
 
-#### `deleteComplaint`
+#### `delete`
 
 ``` purescript
-deleteComplaint :: forall a. Complaints -> Callback a -> Effect Unit
+delete :: forall a. Complaints -> Callback a -> Effect Unit
 ```
 
 Removes a given spam complaint.
