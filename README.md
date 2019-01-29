@@ -11,3 +11,5 @@
 [Credentials](generated-docs/Mailgun/Credentials.md)
 
 [Complaints](generated-docs/Mailgun/Complaints.md)
+
+[Bounces](generated-docs/Mailgun/Bounces.md)
