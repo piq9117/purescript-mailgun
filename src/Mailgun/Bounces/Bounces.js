@@ -1,5 +1,11 @@
-exports.bouncesImpl = function(mailgun) {
-  return mailgun.bounces();
+var isNil = function(a) {
+  return a === undefined || a === null;
+};
+
+exports.bouncesImpl = function(mailgun, addr) {
+  return isNil(addr)
+    ? mailgun.bounces()
+    : mailgun.bounces(addr);
 };
 
 exports.listImpl = function(bounces, cb) {
