@@ -1,4 +1,15 @@
-module Mailgun.Unsubscribes where
+-- | This API allows you to programmatically download the list of recipeints
+-- | who have unsubscribed from your emails. You can also programmatically
+-- | "clear" the unsubscribe event.
+module Mailgun.Unsubscribes
+       ( Unsubscribes
+       , UnsubscribesAttr
+       , unsubscribes
+       , list
+       , info
+       , delete
+       , create
+       ) where
 
 import Effect.Uncurried
 
@@ -38,18 +49,23 @@ attrToExt u =
   , created_at : u.created_at
   }
 
+-- | unsubscribes api
 unsubscribes :: Mailgun -> Maybe String -> Unsubscribes
 unsubscribes mlgn str = runFn2 unsubscribesImpl mlgn (toNullable str)
 
+-- | Fetches the list of unsubscribes.
 list :: ∀ a. Unsubscribes -> Callback a -> Effect Unit
 list unsub cb = runEffectFn2 listImpl unsub (handleCallback cb)
 
+-- | Retrieve a single unsubscribe record.
 info :: ∀ a. Unsubscribes -> Callback a -> Effect Unit
 info unsub cb = runEffectFn2 infoImpl unsub (handleCallback cb)
 
+-- | Removes an addresss from the unsubscribes table.
 delete :: ∀ a. Unsubscribes -> Callback a -> Effect Unit
 delete unsubs cb = runEffectFn2 deleteImpl unsubs (handleCallback cb)
 
+-- | Adds address to unsubscribed table.
 create :: ∀ a. Unsubscribes -> UnsubscribesAttr -> Callback a -> Effect Unit
 create unsubs attr cb =
   runEffectFn3 createImpl unsubs (attrToExt attr) (handleCallback cb)
