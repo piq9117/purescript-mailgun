@@ -1,6 +1,17 @@
 -- | Mailgun Routes are powerful way to handle the incoming traffic. This API
 -- | allows you to work with routes programmatically.
-module Mailgun.Routes where
+module Mailgun.Routes
+       ( Routes
+       , RoutesAttr
+       , ActionTypes
+       , ExpressionFilters
+       , routes
+       , list
+       , info
+       , create
+       , update
+       , delete
+       ) where
 
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.Maybe (Maybe)
