@@ -1,7 +1,9 @@
-var isNil = require("../Common/js-utils").isNil;
+var isNil = function(a) {
+  return a === undefined || a === null;
+};
 
 exports.routesImpl = function(mailgun, id) {
-  return isNil(a)
+  return isNil(id)
     ? mailgun.routes()
     : mailgun.routes(id);
 };
