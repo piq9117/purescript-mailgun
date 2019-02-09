@@ -9,48 +9,6 @@ allows you to work with routes programmatically.
 data Routes :: Type
 ```
 
-#### `routesImpl`
-
-``` purescript
-routesImpl :: Fn2 Mailgun (Nullable String) Routes
-```
-
-#### `listImpl`
-
-``` purescript
-listImpl :: forall a. EffectFn2 Routes (JSCallback a) Unit
-```
-
-#### `infoImpl`
-
-``` purescript
-infoImpl :: forall a. EffectFn2 Routes (JSCallback a) Unit
-```
-
-#### `createImpl`
-
-``` purescript
-createImpl :: forall a. EffectFn3 Routes RoutesAttrExt (JSCallback a) Unit
-```
-
-#### `updateImpl`
-
-``` purescript
-updateImpl :: forall a. EffectFn3 Routes RoutesAttrExt (JSCallback a) Unit
-```
-
-#### `deleteImpl`
-
-``` purescript
-deleteImpl :: forall a. EffectFn2 Routes (JSCallback a) Unit
-```
-
-#### `RoutesAttrExt`
-
-``` purescript
-type RoutesAttrExt = { priority :: Int, description :: String, expression :: String, action :: String }
-```
-
 #### `RoutesAttr`
 
 ``` purescript
@@ -61,60 +19,12 @@ type RoutesAttr = { priority :: Int, description :: String, expression :: Expres
 
 ``` purescript
 data ActionTypes
-  = Forward String
-  | Stop String
-  | Store String
 ```
 
 #### `ExpressionFilters`
 
 ``` purescript
 data ExpressionFilters
-  = Recipient String
-  | Header String
-  | CatchAll String
-```
-
-#### `expressionFiltersToStr`
-
-``` purescript
-expressionFiltersToStr :: ExpressionFilters -> String
-```
-
-#### `actionTypesToStr`
-
-``` purescript
-actionTypesToStr :: ActionTypes -> String
-```
-
-#### `catchAll`
-
-``` purescript
-catchAll :: ExpressionFilters
-```
-
-#### `matchRecipient`
-
-``` purescript
-matchRecipient :: String -> ExpressionFilters
-```
-
-#### `stopAction`
-
-``` purescript
-stopAction :: ActionTypes
-```
-
-#### `forwardAction`
-
-``` purescript
-forwardAction :: String -> ActionTypes
-```
-
-#### `attrToExt`
-
-``` purescript
-attrToExt :: RoutesAttr -> RoutesAttrExt
 ```
 
 #### `routes`
