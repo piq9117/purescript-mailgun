@@ -2,7 +2,8 @@
 -- | using Mailgun Mailing List API.
 module Mailgun.MailingList
        ( MailingList
-       , AccessLevel
+       , AccessLevel(..)
+       , mailingList
        , list
        , info
        , create
@@ -44,16 +45,16 @@ type MailingListAttr =
   }
 
 data AccessLevel
-  = Readonly String
-  | Members String
-  | Everyone String
+  = Readonly
+  | Members
+  | Everyone
 
 accessLvlToStr :: AccessLevel -> String
 accessLvlToStr acc =
   case acc of
-    Readonly s -> s
-    Members s -> s
-    Everyone s -> s
+    Readonly -> "readonly"
+    Members -> "members"
+    Everyone -> "everyone"
 
 attrToExt :: MailingListAttr -> MailingListAttrExt
 attrToExt attr =
