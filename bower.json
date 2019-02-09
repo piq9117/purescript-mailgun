@@ -1,11 +1,23 @@
 {
   "name": "purescript-mailgun",
+  "homepage": "https://github.com/piq9117/purescript-mailgun",
+  "description": "Purescript bindings for mailgun-js package",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "output"
   ],
+  "keywords": [
+    "purescript",
+    "mailgun",
+    "email"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/piq9117/purescript-mailgun"
+  },
   "dependencies": {
     "purescript-prelude": "^4.1.0",
     "purescript-effect": "^2.0.0",
