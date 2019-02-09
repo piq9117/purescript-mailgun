@@ -12,7 +12,7 @@ exports.listImpl = function(members, cb) {
   return members.list(cb);
 };
 
-exports.pagesImpl = function(members, cb) {
+exports.pageImpl = function(members, cb) {
   return members.pages().page(cb);
 };
 
