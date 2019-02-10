@@ -1,6 +1,7 @@
 -- | Programmatically work with mailing list members.
 module Mailgun.MailingListMembers
        ( Members
+       , YesOrNo(..)
        , members
        , list
        , page
@@ -39,27 +40,32 @@ type MemberListAttrExt =
   { address :: String
   , name :: Nullable String
   , subscribed :: Boolean
-  , upsert :: Boolean
+  , upsert :: String
   }
 
 type MemberListAttr =
   { address :: String
   , name :: Maybe String
   , subscribed :: Boolean
-  , upsert :: Boolean
+  , upsert :: YesOrNo
   }
 
-data Mattr =
-  Mattr
-  { address :: String
-  }
+data YesOrNo
+  = Yes
+  | No
+
+yesNoToStr :: YesOrNo -> String
+yesNoToStr yn =
+  case yn of
+    Yes -> "yes"
+    No -> "no"
 
 attrToExt :: MemberListAttr -> MemberListAttrExt
 attrToExt attr =
   { address: attr.address
   , name: (toNullable attr.name)
   , subscribed: attr.subscribed
-  , upsert: attr.upsert
+  , upsert: (yesNoToStr attr.upsert)
   }
 
 -- | members api.
