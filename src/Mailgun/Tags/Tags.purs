@@ -20,8 +20,10 @@ foreign import data Tags :: Type
 foreign import tagsImpl :: Fn2 Mailgun (Nullable String) Tags
 foreign import listImpl :: ∀ a. EffectFn2 Tags (JSCallback a) Unit
 
+-- tags api
 tags :: Mailgun -> Maybe String -> Tags
 tags mailgun str = runFn2 tagsImpl mailgun (toNullable str)
 
+-- List all tags
 list :: ∀ a. Tags -> Callback a -> Effect Unit
 list tgs cb = runEffectFn2 listImpl tgs (handleCallback cb)
