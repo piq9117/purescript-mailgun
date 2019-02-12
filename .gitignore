@@ -7,3 +7,4 @@
 /.purs*
 /.psa*
 *.md.temp
+/generated-docs/
