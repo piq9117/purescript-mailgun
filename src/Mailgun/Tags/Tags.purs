@@ -1,4 +1,10 @@
-module Mailgun.Tags where
+-- Deletes all counters for particular tag and the tag itself.
+-- See http://documentation.mailgun.com/api-stats.html
+module Mailgun.Tags
+       ( Tags
+       , tags
+       , list
+       ) where
 
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.Maybe (Maybe)
