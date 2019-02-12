@@ -1,15 +1,4 @@
 # purescript-mailgun
 
-[Mailgun](generated-docs/Mailgun.md)
+Purescript bindings for [mailgun-js](http://bojand.github.io/mailgun-js/#/)
 
-[Domain](generated-docs/Mailgun/Domain.md)
-
-[Tracking](generated-docs/Mailgun/Tracking.md)
-
-[Events](generated-docs/Mailgun/Events.md)
-
-[Credentials](generated-docs/Mailgun/Credentials.md)
-
-[Complaints](generated-docs/Mailgun/Complaints.md)
-
-[Bounces](generated-docs/Mailgun/Bounces.md)
